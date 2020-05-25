@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import tienda from "../api/tienda.js";
-import carrito from "./carrito.js";
+//import carrito from "./carrito.js";
 import empanadas from "./empanadas.js";
 
 Vue.use(Vuex);
@@ -11,7 +11,7 @@ export default new Vuex.Store({
   strict: true,
   
   modules: {
-    carrito,
+    //carrito,
     empanadas
   },
 
