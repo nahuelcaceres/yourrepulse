@@ -9,7 +9,7 @@ import Login from '@/components/Login';
 import EmpanadaListado from '@/components/EmpanadaListado';
 import AgregarEmpanada from '@/components/AgregarEmpanada';
 
-import AddEmpanadaListado from '@/components/AddEmpanadaListado';
+import AddEmpanadaLista from '@/components/AddEmpanadaLista';
 
 const router = new VueRouter({
     routes: [
@@ -36,8 +36,8 @@ const router = new VueRouter({
 
         {
             path: '/listado',
-            name: 'AddEmpanadaListado',
-            component: AddEmpanadaListado
+            name: 'AddEmpanadaLista',
+            component: AddEmpanadaLista
         },
 
         {
