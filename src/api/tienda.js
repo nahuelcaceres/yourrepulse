@@ -1,26 +1,54 @@
-const _empanadas = [
-    { id: 1, title: "[CS] CARNE SUAVE", price: 45, inventory: 50 },
-    { id: 2, title: "[PO] POLLO", price: 45, inventory: 10 },
-    { id: 3, title: "[RJ] ROQUEFORT JAMON", price: 45, inventory: 10 }
-  ];
+let _empanadas = [
+  { id: 1, title: "[CS] CARNE SUAVE", price: 45, inventory: 50 },
+  { id: 2, title: "[PO] POLLO", price: 45, inventory: 10 },
+  { id: 3, title: "[RJ] ROQUEFORT JAMONs", price: 45, inventory: 10 }
+];
+
+import firebase from '../Firebase.js';
 
 //TIP: exportar funciones de este modulo
 export default {
-   
-    getEmpanadas(cb) {
-      //setTimeout(()=> cb(_empanadas), 100);
-      cb(_empanadas);
-    },
-  
-    buyEmpanadas(empanadas,cb, errorCb){
-      setTimeout(() => {
+
+  getEmpanadas(cb) {
+    //setTimeout(()=> cb(_empanadas), 100);
+
+    firebase.firestore().collection('empanadas').onSnapshot((querySnapshot) => {
+      //this.empanadas = [];
+      
+      querySnapshot.forEach((doc) => {
         
-        //TIP: simulate random checkout failure.
-        Math.random() > 0.5 || navigator.userAgent.indexOf("PhantomJS") > -1
-          ? cb()
-          : errorCb();
-      }, 100);
-    }
-    
+        //if (doc.data().estado == 'alta') {
+          _empanadas.push({
+            
+            key: doc.id,
+            codigo: doc.data().codigo,
+            descripcion: doc.data().descripcion, 
+
+            id: this.key,
+            title: `[${doc.data().codigo}] ${doc.data().descripcion}` ,
+            price: 40,
+            inventory: 10
+
+          });
+        //}
+      });
+      
+      
+      cb(_empanadas);
+
+    });
+
+
+  },
+
+  buyEmpanadas(empanadas, cb, errorCb) {
+    setTimeout(() => {
+
+      //TIP: simulate random checkout failure.
+      Math.random() > 0.5 || navigator.userAgent.indexOf("PhantomJS") > -1
+        ? cb()
+        : errorCb();
+    }, 100);
+  }
+
 };
-  

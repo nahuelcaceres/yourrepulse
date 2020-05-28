@@ -9,6 +9,7 @@ import Login from '@/components/Login';
 import EmpanadaListado from '@/components/EmpanadaListado';
 import AgregarEmpanada from '@/components/AgregarEmpanada';
 
+import Home from '@/views/Home';
 import AddEmpanadaLista from '@/components/AddEmpanadaLista';
 
 const router = new VueRouter({
@@ -32,6 +33,13 @@ const router = new VueRouter({
             path: '/edit-board/:id',
             name: 'EditBoard',
             component: EditBoard
+        },
+
+
+        {
+            path: '/home',
+            name: 'Home',
+            component: Home
         },
 
         {
