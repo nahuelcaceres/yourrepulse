@@ -9,9 +9,12 @@
             <button @click="removeItem($index)"> X </button>
         </li>
       </ul>
+      
+      <h4>Total ${{carritoTotal || 0}}</h4>
+
       <button v-if="carritoItems.length" @click="checkout">Comprar</button>
       <hr>
-      <h4>Total {{carritoTotal || 0}}</h4>
+      
       
       <div v-if="$store.state.checkoutErrorEmpanadas">
           <p>Error procesando el pedido</p>
@@ -20,9 +23,10 @@
 </template>
 
 <script>
-import {currency} from '@/utils/currency.js';
+//import currency from '@/utils/currency.js';
+
 export default {
-    name: 'AppEmpanadaCarrito',
+    name: 'AddEmpanadaCarrito',
     methods: {
         removeItem(index){
             this.$store.dispatch('removeEmpanadaFromCarrito', index);
@@ -39,7 +43,8 @@ export default {
         },
 
         carritoTotal(){
-            return currency(this.$store.getters.carritoTotal, " $");
+            //return currency(this.$store.getters.carritoTotal, " $");
+            return this.$store.getters.carritoTotal;
         }
     }
 }

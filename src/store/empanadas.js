@@ -68,7 +68,7 @@ export default {
       
         nearSoldOutEmpanada(state){
             return (id) => {
-              return state.empanadas.find(empanada => empanada.id === id).inventory < 2;
+              return state.empanadas.find(empanada => empanada.id === id).inventory <= 5;
             };
         }
     }

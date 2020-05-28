@@ -10,7 +10,7 @@
         :key="empanada.id"
         >
         
-        {{ empanada.title }} | {{ empanada.price }}
+        {{ empanada.title }} | {{ empanada.price }} || 
         
         <i>{{ empanada.inventory }} </i>
         <button @click="addToCarrito(empanada)">Add</button>
@@ -26,7 +26,7 @@
 //import api from '../api/shop.js'
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
-    name: "AppEmpanadaLista",
+    name: "AddEmpanadaLista",
     
     async created() {
         //1ºPido las empanadas a la api, y las envio al state mediante mutatcion setEmpanadas
