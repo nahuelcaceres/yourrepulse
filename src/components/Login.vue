@@ -19,7 +19,7 @@
                         :label-cols="3"
                         breakpoint="md"
                         >
-                        <h2>Loguearse from master</h2><br>
+                        <h2>Loguearse from master2</h2><br>
 
                         <b-form-input type="email"  id="usuario" v-model="usuario"  placeholder="Email"></b-form-input>
                         
