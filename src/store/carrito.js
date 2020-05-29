@@ -4,22 +4,23 @@ export default {
     },
     mutations: {
         incrementEmpanadaQuantity(state, empanada){
-            empanada.quantity ++;
-          },
-          addEmpanadaToCarrito(state, empanada){
-            state.carrito.push({
-              id: empanada.id,
-              quantity: 1
-            })
-          },
-          
-          removeEmpanadaFromCarrito(state, index){
-            state.carrito.splice(index, 1);
-          },
+          empanada.quantity ++;
+        },
 
-          emptyCarritoEmpanadas(state){
-            state.carrito = [];
-          },
+        addEmpanadaToCarrito(state, empanada){
+          state.carrito.push({
+            id: empanada.id,
+            quantity: 1
+          })
+        },
+        
+        removeEmpanadaFromCarrito(state, index){
+          state.carrito.splice(index, 1);
+        },
+
+        emptyCarritoEmpanadas(state){
+          state.carrito = [];
+        },
     },
     actions: {
         addEmpanadaToCarrito(context, empanada){
@@ -63,15 +64,15 @@ export default {
   
         empanadasEnCarrito(state, getters, rootState){
             return state.carrito.map(item => {
-            const empanada = rootState.empanadas.empanadas.find(empanada => empanada.id === item.id );
-    
-            return {
-                title: empanada.title,
-                price: empanada.price,
-                quantity: item.quantity
-            }
-        })
-      },
+              const empanada = rootState.empanadas.items.find(empanada => empanada.id === item.id );
+      
+              return {
+                  title: empanada.title,
+                  price: empanada.price,
+                  quantity: item.quantity
+              }
+           })
+        },
   
     }
 };

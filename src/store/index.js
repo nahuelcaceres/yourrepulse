@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import tienda from "../api/tienda.js";
+import items from "../api/items.js";
 import carrito from "./carrito.js";
 import empanadas from "./empanadas.js";
 
@@ -28,7 +28,7 @@ export default new Vuex.Store({
   actions: {
     
     checkoutCarritoEmpanadas({ commit, state }){
-      tienda.buyEmpanadas(
+      items.buyEmpanadas(
         state.carrito.carrito, () => {
         // Vaciar el carrito (con una mutacion)
         commit('emptyCarritoEmpanadas');

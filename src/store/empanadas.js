@@ -1,51 +1,51 @@
 import Vue from "vue";
-import tienda from "../api/tienda.js";
+import items from "../api/items.js";
 
 export default {
     state: {
-        empanadas: [],
-        selectedEmpanada: {}
+        items: [],
+        selectedItem: {}
     },
     mutations: {
         //TIP: SIEMPRE EL PRIMER PARAMETRO ES EL STATE, LUEGO EL PAYLOAD(OPCIONAL)
-        setEmpanadas(state, empanadas){
-            state.empanadas = empanadas;
+        setItems(state, items){
+            state.items = items;
         },
   
-        setSelectedEmpanada(state, empanada){
-            state.selectedEmpanada = empanada;
+        setSelectedItem(state, item){
+            state.selectedItem = item;
         },
   
         editEmpanada(state, data){
             // Buscar el indice del producto
-            const index = state.empanadas.findIndex(
-                empanada => empanada.id === state.selectedEmpanada.id
+            const index = state.items.findIndex(
+                empanada => empanada.id === state.selectedItem.id
             );
   
             // Componer la empanada en base a la props cambiadas
-            const empanada = Object.assign({}, state.empanadas[index], data);
+            const empanada = Object.assign({}, state.items[index], data);
     
             // Actualizar activando la reactividad
-            Vue.set(state.empanadas, index, empanada);
-      },
+            Vue.set(state.items, index, empanada);
+         },
   
-      decrementEmpanadaInventory(state, empanada){
-        empanada.inventory--;
-      },
-  
-      incrementEmpanadaInventory(state, item){
-        const empanada = state.empanadas.find(empanada => empanada.id === item.id);
-  
-        empanada.inventory += item.quantity; //Le sumo lo que tenga el inventory
-  
-      },
+        decrementEmpanadaInventory(state, empanada){
+            empanada.inventory--;
+        },
+    
+        incrementEmpanadaInventory(state, item){
+            const empanada = state.items.find(empanada => empanada.id === item.id);
+    
+            empanada.inventory += item.quantity; //Le sumo lo que tenga el inventory
+    
+        },
     },
     actions: {
         //TIP: EL PRIMER PARAMETRO ES EL CONTEXTO, PERO LO PODEMOS DESECTRUCTURAR
-        getEmpanadas({commit}){
+        getItems({commit}){
             return new Promise((resolve) => {
-            tienda.getEmpanadas( empanadas => {
-                commit("setEmpanadas", empanadas);
+            items.getItems( items => {
+                commit("setItems", items);
     
                 resolve();
             });
@@ -54,21 +54,21 @@ export default {
     },
     getters: {
         //TIP: seria una propiedad computada pero del state, cuando algo cambie...se recalcula
-        empanadasEnStock(state){
+        itemInStock(state){
             //Puede devolver una version modificada de algo de state.
             //Ej: Ahora queremos las empanadas filtradas por si tienen stock
-            return state.empanadas.filter(empanada => {
-              return empanada.inventory > 0;
+            return state.items.filter(item => {
+              return item.inventory > 0;
             })
         },
 
-        selectedEmpanada(state){
-            return state.selectedEmpanada;
+        selectedItem(state){
+            return state.selectedItem;
         },
       
         nearSoldOutEmpanada(state){
             return (id) => {
-              return state.empanadas.find(empanada => empanada.id === id).inventory <= 5;
+              return state.items.find(item => item.id === id).inventory <= 5;
             };
         }
     }

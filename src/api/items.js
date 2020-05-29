@@ -9,7 +9,7 @@ import firebase from '../Firebase.js';
 //TIP: exportar funciones de este modulo
 export default {
 
-  getEmpanadas(cb) {
+  getItems(cb) {
     //setTimeout(()=> cb(_empanadas), 100);
 
     firebase.firestore().collection('empanadas').onSnapshot((querySnapshot) => {
