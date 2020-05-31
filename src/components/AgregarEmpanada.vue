@@ -7,26 +7,26 @@
             </h2>
             <b-jumbotron>
                 <b-form @submit="onSubmit">
-                    <b-form-group id="codigoGroup"
+                    <b-form-group id="codeGroup"
                         horizontal
                         :label-cols="4"
                         breakpoint="md"
                         label="Ingresar Codigo">
 
-                        <b-form-input id="codigo" v-model.trim="empanada.codigo"></b-form-input>
+                        <b-form-input id="code" v-model.trim="item.code"></b-form-input>
                     </b-form-group>
                     
-                    <b-form-group id="descripcionGroup"
+                    <b-form-group id="descriptionGroup"
                         horizontal
                         :label-cols="4"
                         breakpoint = "md"
                         label="Ingresar Descripcion">
                         
-                        <b-form-textarea id="descripcion"
-                            v-model="empanada.descripcion"
+                        <b-form-textarea id="description"
+                            v-model="item.description"
                             placeholder="Descripcion"
                             :rows="2"
-                            :max-rows="6">{{empanada.descripcion}}
+                            :max-rows="6">{{item.description}}
                         </b-form-textarea>
                     </b-form-group>
  
@@ -39,14 +39,14 @@
 </template>
 
 <script>
-import firebase from '../Firebase'
 import router from '../router'
+import firebase from '../Firebase'
 export default {
     name: 'AgregarEmpanada',
     data() {
         return {
-            ref: firebase.firestore().collection('empanadas'),
-            empanada: {
+            ref: firebase.firestore().collection('items'),
+            item: {
                 estado: 'alta'
             }
         }
@@ -54,9 +54,9 @@ export default {
     methods: {
         onSubmit(evt){
             evt.preventDefault();
-            this.ref.add(this.empanada).then(() =>{
-                this.empanada.codigo = ''
-                this.empanada.descripcion = ''
+            this.ref.add(this.item).then(() =>{
+                this.item.code = ''
+                this.item.description = ''
                 
                 router.push({
                     name: 'EmpanadaListado'

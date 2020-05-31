@@ -23,6 +23,7 @@
 </template>
 
 <script>
+// TODO research why doesn't work this import.
 //import currency from '@/utils/currency.js';
 
 export default {
@@ -33,7 +34,7 @@ export default {
         },
 
         checkout(){
-            //Aqui hacer mostrar el WhatsApp
+            
             this.$store.dispatch('checkoutItemsCart')
         }
     },

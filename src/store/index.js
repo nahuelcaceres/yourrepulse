@@ -20,10 +20,11 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    //TIP: SOLO LAS MUTACIONES PUEDEN MODIFICAR EL STATE DE NUESTRA APP
+    
     setCheckoutItemError(state, error){
       state.checkoutItemError = error;
     }
+
   },
   actions: {
     
@@ -31,14 +32,13 @@ export default new Vuex.Store({
       serviceItems.buyItems(
         
         state.cart.cart, () => {
-          // Vaciar el cart (con una mutacion)
+          
           commit('emptyItemsCart');
           
-          // Manejar el error(Guardarlo para enviarlo a algun lugar, procesarlo)
           commit('setCheckoutItemError', false);
 
         }, () => {
-          // Establecer que hay errores
+          
           commit('setCheckoutItemError', true);
 
       })

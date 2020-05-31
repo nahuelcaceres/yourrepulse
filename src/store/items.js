@@ -7,7 +7,7 @@ export default {
         selectedItem: {}
     },
     mutations: {
-        //TIP: SIEMPRE EL PRIMER PARAMETRO ES EL STATE, LUEGO EL PAYLOAD(OPCIONAL)
+        
         setItems(state, items){
             state.items = items;
         },
@@ -17,15 +17,15 @@ export default {
         },
   
         editItem(state, data){
-            // Buscar el indice del producto
+            
             const index = state.items.findIndex(
                 item => item.id === state.selectedItem.id
             );
   
-            // Componer el item segun las props cambiadas
+            // Composing the item according to the changed properties.
             const item = Object.assign({}, state.items[index], data);
     
-            // Actualizar activando la reactividad
+            // Update by activating reactivity.
             Vue.set(state.items, index, item);
          },
   
@@ -40,7 +40,7 @@ export default {
         },
     },
     actions: {
-        //TIP: EL PRIMER PARAMETRO ES EL CONTEXTO, PERO LO PODEMOS DESECTRUCTURAR
+        
         getItems({commit}){
             return new Promise((resolve) => {
                 serviceItems.getItems( items => {
@@ -50,12 +50,16 @@ export default {
             });
         })
       },
+
     },
     getters: {
-        //TIP: seria una propiedad computada pero del state, cuando algo cambie...se recalcula
+
+        // It would be like a computed property but of the state,
+        // when something changes, it is recalculated.
         itemInStock(state){
-            //Puede devolver una version modificada de algo de state.
-            //Ej: Ahora queremos los items filtrados por si tienen stock
+            // You can return a modified version of something from state.
+            
+            //Ex: Now we want the filterd items if they have stock.
             return state.items.filter(item => {
               return item.inventory > 0;
             })

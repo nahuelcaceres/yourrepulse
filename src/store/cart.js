@@ -24,33 +24,33 @@ export default {
     },
     actions: {
         addItemToCart(context, item){
-            // Hay inventario de la item?
+            
             if (item.inventory === 0) return;
       
-            // Existe ya en el cart?
+            // Do we have the item in te cart?
             const localItem = context.state.cart.find(x => x.id === item.id);
       
             if (localItem) {
-              // Si es asi, hay que añadir uno mas a la compra
-              // Como tengo que tocar el state, se hace desde una mutacion
+              // If so, one more must be added to the cart.
+              // As it is necessary to modify the 'state', it is done from a mutation.
               context.commit('incrementItemQuantity', localItem);
             
             }else {
-              // Si no es asi, añadir la item al cart
+              // If not, add the item to the cart.
               context.commit('addItemToCart', item);
             }
       
-            // Independientemente, restar al inventario de ese item
+            // However, subtract from the inventory of this item.
             context.commit('decrementItemInventory', item);
         },
       
         removeItemFromCart(context, index){
             const item = context.state.cart[index];
       
-            // Eliminar el item del cart
+            // Delete the item from the cart.
             context.commit('removeItemFromCart', index);
             
-            // Restaurar el inventario
+            // Restores item inventory.
             context.commit('incrementItemInventory', item);
         },
     },

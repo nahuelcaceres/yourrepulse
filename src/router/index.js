@@ -34,7 +34,19 @@ const router = new VueRouter({
             name: 'EditBoard',
             component: EditBoard
         },
+        
 
+
+        // any url doesn't validate, send to home
+        { 
+            path: '*',
+            redirect: '/home'
+        },
+        
+        {
+            path: '/',
+            redirect: '/home'
+        },
 
         {
             path: '/home',
@@ -47,26 +59,21 @@ const router = new VueRouter({
             name: 'AppItemsList',
             component: AppItemsList
         },
-
-        {
-            path: '/',
-            redirect: '/home'
-        },
-        { //Cualquier url no valida...envia a login
-            path: '*',
-            redirect: '/home'
-        },
+        
         {
             path: '/login',
             name: 'Login',
             component: Login
         },
+
+
+        // routes that require authenticated user.
         {
             path: '/empanada-listado',
             name: 'EmpanadaListado',
             component: EmpanadaListado,
             meta:{
-                autentificado: true //Para poder acceder ..tienes que estar autenficado.
+                authenticated: true
             }
         },
         {
@@ -74,7 +81,7 @@ const router = new VueRouter({
             name: 'AgregarEmpanada',
             component: AgregarEmpanada,
             meta:{
-                autentificado: true //Para poder acceder ..tienes que estar autenficado.
+                authenticated: true
             }
         }
     ]
@@ -82,14 +89,14 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-    //Tengo un Usuario logueado
-    let usuario = firebase.auth().currentUser;
+    let authenticatedUser = firebase.auth().currentUser;
     
-    //Es una ruta que requiere estar autentificado
-    let requiereAutorizacion = to.matched.some(record => record.meta.autentificado);
+    //'to' is a route that requires authentitcation?
+    let requiereAutorizacion = to.matched.some(record => record.meta.authenticated);
 
     if (requiereAutorizacion){
-        if (usuario){
+       
+        if (authenticatedUser){
             next();
         } else {
             next('login');
