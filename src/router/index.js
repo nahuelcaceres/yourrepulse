@@ -10,7 +10,7 @@ import EmpanadaListado from '@/components/EmpanadaListado';
 import AgregarEmpanada from '@/components/AgregarEmpanada';
 
 import Home from '@/views/Home';
-import AddEmpanadaLista from '@/components/AddEmpanadaLista';
+import AppItemsList from '@/components/AppItemsList';
 
 const router = new VueRouter({
     routes: [
@@ -34,7 +34,19 @@ const router = new VueRouter({
             name: 'EditBoard',
             component: EditBoard
         },
+        
 
+
+        // any url doesn't validate, send to home
+        { 
+            path: '*',
+            redirect: '/home'
+        },
+        
+        {
+            path: '/',
+            redirect: '/home'
+        },
 
         {
             path: '/home',
@@ -44,29 +56,24 @@ const router = new VueRouter({
 
         {
             path: '/listado',
-            name: 'AddEmpanadaLista',
-            component: AddEmpanadaLista
+            name: 'AppItemsList',
+            component: AppItemsList
         },
-
-        {
-            path: '/',
-            redirect: '/login'
-        },
-        { //Cualquier url no valida...envia a login
-            path: '*',
-            redirect: '/login'
-        },
+        
         {
             path: '/login',
             name: 'Login',
             component: Login
         },
+
+
+        // routes that require authenticated user.
         {
             path: '/empanada-listado',
             name: 'EmpanadaListado',
             component: EmpanadaListado,
             meta:{
-                autentificado: true //Para poder acceder ..tienes que estar autenficado.
+                authenticated: true
             }
         },
         {
@@ -74,7 +81,7 @@ const router = new VueRouter({
             name: 'AgregarEmpanada',
             component: AgregarEmpanada,
             meta:{
-                autentificado: true //Para poder acceder ..tienes que estar autenficado.
+                authenticated: true
             }
         }
     ]
@@ -82,14 +89,14 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-    //Tengo un Usuario logueado
-    let usuario = firebase.auth().currentUser;
+    let authenticatedUser = firebase.auth().currentUser;
     
-    //Es una ruta que requiere estar autentificado
-    let requiereAutorizacion = to.matched.some(record => record.meta.autentificado);
+    //'to' is a route that requires authentitcation?
+    let requiereAutorizacion = to.matched.some(record => record.meta.authenticated);
 
     if (requiereAutorizacion){
-        if (usuario){
+       
+        if (authenticatedUser){
             next();
         } else {
             next('login');

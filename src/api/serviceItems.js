@@ -1,4 +1,4 @@
-let _empanadas = [
+let _items = [
   { id: 1, title: "[CS] CARNE SUAVE", price: 45, inventory: 50 },
   { id: 2, title: "[PO] POLLO", price: 45, inventory: 10 },
   { id: 3, title: "[RJ] ROQUEFORT JAMONs", price: 45, inventory: 10 }
@@ -6,42 +6,40 @@ let _empanadas = [
 
 import firebase from '../Firebase.js';
 
-//TIP: exportar funciones de este modulo
 export default {
 
-  getEmpanadas(cb) {
-    //setTimeout(()=> cb(_empanadas), 100);
-
-    firebase.firestore().collection('empanadas').onSnapshot((querySnapshot) => {
-      //this.empanadas = [];
+  getItems(cb) {
+    
+    firebase.firestore().collection('items').onSnapshot((querySnapshot) => {
+      //this.items = [];
       
       querySnapshot.forEach((doc) => {
-        
         //if (doc.data().estado == 'alta') {
-          _empanadas.push({
+          _items.push({
             
             key: doc.id,
-            codigo: doc.data().codigo,
-            descripcion: doc.data().descripcion, 
+            codigo: doc.data().code,
+            descripcion: doc.data().description, 
 
             id: this.key,
-            title: `[${doc.data().codigo}] ${doc.data().descripcion}` ,
-            price: 40,
-            inventory: 10
+            title: `[${doc.data().code}] ${doc.data().description}` ,
+            price: doc.data().price,
+            inventory: doc.data().inventory
 
           });
-        //}
-      });
+        });
       
       
-      cb(_empanadas);
+      cb(_items);
 
     });
 
 
   },
 
-  buyEmpanadas(empanadas, cb, errorCb) {
+  buyItems(items, cb, errorCb) {
+    //TODO: open chrome tab for whatsapp using items object.
+    
     setTimeout(() => {
 
       //TIP: simulate random checkout failure.

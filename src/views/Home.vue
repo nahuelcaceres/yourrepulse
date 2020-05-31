@@ -11,20 +11,20 @@
     -->
 
     <b-card>
-        <AddEmpanadaLista />
-        <AddEmpanadaCarrito />
+        <AppItemsList />
+        <AppCart />
     </b-card>
     
 </template>
 
 <script>
-import AddEmpanadaLista from '@/components/AddEmpanadaLista';
-import AddEmpanadaCarrito from '@/components/AddEmpanadaCarrito';
+import AppItemsList from '@/components/AppItemsList';
+import AppCart from '@/components/AppCart';
 export default {
     name: 'Home',
     components: {
-            AddEmpanadaLista,
-            AddEmpanadaCarrito
+            AppItemsList,
+            AppCart
         }
 }
 </script>
