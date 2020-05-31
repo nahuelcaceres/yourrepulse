@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import items from "../api/items.js";
-import carrito from "./carrito.js";
-import empanadas from "./empanadas.js";
+import serviceItems from "../api/serviceItems.js";
+import cart from "./cart.js";
+import items from "./items.js";
 
 Vue.use(Vuex);
 
@@ -11,34 +11,35 @@ export default new Vuex.Store({
   strict: true,
   
   modules: {
-    carrito,
-    empanadas
+    cart,
+    items
   },
 
   state: {
-    checkoutErrorEmpanadas: false,
+    checkoutItemError: false,
   },
 
   mutations: {
     //TIP: SOLO LAS MUTACIONES PUEDEN MODIFICAR EL STATE DE NUESTRA APP
-    setCheckoutErrorEmpanada(state, error){
-      state.checkoutErrorEmpanadas = error;
+    setCheckoutItemError(state, error){
+      state.checkoutItemError = error;
     }
   },
   actions: {
     
-    checkoutCarritoEmpanadas({ commit, state }){
-      items.buyEmpanadas(
-        state.carrito.carrito, () => {
-        // Vaciar el carrito (con una mutacion)
-        commit('emptyCarritoEmpanadas');
+    checkoutItemsCart({ commit, state }){
+      serviceItems.buyItems(
         
-        // Manejar el error(Guardarlo para enviarlo a algun lugar, procesarlo)
-        commit('setCheckoutErrorEmpanada', false);
+        state.cart.cart, () => {
+          // Vaciar el cart (con una mutacion)
+          commit('emptyItemsCart');
+          
+          // Manejar el error(Guardarlo para enviarlo a algun lugar, procesarlo)
+          commit('setCheckoutItemError', false);
 
-      }, () => {
-        // Establecer que hay errores
-        commit('setCheckoutErrorEmpanada', true);
+        }, () => {
+          // Establecer que hay errores
+          commit('setCheckoutItemError', true);
 
       })
     }

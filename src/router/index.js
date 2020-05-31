@@ -10,7 +10,7 @@ import EmpanadaListado from '@/components/EmpanadaListado';
 import AgregarEmpanada from '@/components/AgregarEmpanada';
 
 import Home from '@/views/Home';
-import AddEmpanadaLista from '@/components/AddEmpanadaLista';
+import AppItemsList from '@/components/AppItemsList';
 
 const router = new VueRouter({
     routes: [
@@ -44,17 +44,17 @@ const router = new VueRouter({
 
         {
             path: '/listado',
-            name: 'AddEmpanadaLista',
-            component: AddEmpanadaLista
+            name: 'AppItemsList',
+            component: AppItemsList
         },
 
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/home'
         },
         { //Cualquier url no valida...envia a login
             path: '*',
-            redirect: '/login'
+            redirect: '/home'
         },
         {
             path: '/login',

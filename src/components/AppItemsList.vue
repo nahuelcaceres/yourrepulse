@@ -4,7 +4,7 @@
     <hr />
     <ul>
       <li 
-        :class="{ 'sold-out': $store.getters.nearSoldOutEmpanada(item.id)}"
+        :class="{ 'sold-out': $store.getters.nearSoldOutItem(item.id)}"
         @click="selectItem(item)" 
         v-for="item in itemInStock" 
         :key="item.id"
@@ -13,7 +13,7 @@
         {{ item.title }} | {{ item.price }} || 
         
         <i>{{ item.inventory }} </i>
-        <button @click="addToCarrito(item)">Add</button>
+        <button @click="addToCart(item)">Add</button>
         
       </li>
     </ul>
@@ -25,7 +25,7 @@
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
-    name: "AddEmpanadaLista",
+    name: "AppItemsList",
     
     async created() {
         
@@ -40,7 +40,7 @@ export default {
 
     methods:  {
         ...mapActions({
-            addToCarrito: 'addEmpanadaToCarrito'
+            addToCart: 'addItemToCart'
         }),
         ...mapMutations({
             selectItem: 'setSelectedItem'

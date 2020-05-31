@@ -3,20 +3,20 @@
       <h2>Carrito</h2>
       <hr/>
       <ul>
-        <li v-for="(item, $index) in carritoItems" :key="item.id">
+        <li v-for="(item, $index) in itemsCart" :key="item.id">
             {{item.title}} ({{ item.quantity}})
 
             <button @click="removeItem($index)"> X </button>
         </li>
       </ul>
       
-      <h4>Total ${{carritoTotal || 0}}</h4>
+      <h4>Total ${{totalCart || 0}}</h4>
 
-      <button v-if="carritoItems.length" @click="checkout">Comprar</button>
+      <button v-if="itemsCart.length" @click="checkout">Comprar</button>
       <hr>
       
       
-      <div v-if="$store.state.checkoutErrorEmpanadas">
+      <div v-if="$store.state.checkoutItemError">
           <p>Error procesando el pedido</p>
       </div>
   </div>
@@ -26,25 +26,25 @@
 //import currency from '@/utils/currency.js';
 
 export default {
-    name: 'AddEmpanadaCarrito',
+    name: 'AppCart',
     methods: {
         removeItem(index){
-            this.$store.dispatch('removeEmpanadaFromCarrito', index);
+            this.$store.dispatch('removeItemFromCart', index);
         },
 
         checkout(){
             //Aqui hacer mostrar el WhatsApp
-            this.$store.dispatch('checkoutCarritoEmpanadas')
+            this.$store.dispatch('checkoutItemsCart')
         }
     },
     computed: {
-        carritoItems(){
-            return this.$store.getters.empanadasEnCarrito;
+        itemsCart(){
+            return this.$store.getters.itemsInCart;
         },
 
-        carritoTotal(){
-            //return currency(this.$store.getters.carritoTotal, " $");
-            return this.$store.getters.carritoTotal;
+        totalCart(){
+            //return currency(this.$store.getters.totalCart, " $");
+            return this.$store.getters.totalCart;
         }
     }
 }

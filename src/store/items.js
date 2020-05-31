@@ -1,5 +1,5 @@
 import Vue from "vue";
-import items from "../api/items.js";
+import serviceItems from "../api/serviceItems.js";
 
 export default {
     state: {
@@ -16,38 +16,37 @@ export default {
             state.selectedItem = item;
         },
   
-        editEmpanada(state, data){
+        editItem(state, data){
             // Buscar el indice del producto
             const index = state.items.findIndex(
-                empanada => empanada.id === state.selectedItem.id
+                item => item.id === state.selectedItem.id
             );
   
-            // Componer la empanada en base a la props cambiadas
-            const empanada = Object.assign({}, state.items[index], data);
+            // Componer el item segun las props cambiadas
+            const item = Object.assign({}, state.items[index], data);
     
             // Actualizar activando la reactividad
-            Vue.set(state.items, index, empanada);
+            Vue.set(state.items, index, item);
          },
   
-        decrementEmpanadaInventory(state, empanada){
-            empanada.inventory--;
+        decrementItemInventory(state, item){
+            item.inventory--;
         },
     
-        incrementEmpanadaInventory(state, item){
-            const empanada = state.items.find(empanada => empanada.id === item.id);
+        incrementItemInventory(state, item){
+            const localItem = state.items.find(x => x.id === item.id);
     
-            empanada.inventory += item.quantity; //Le sumo lo que tenga el inventory
-    
+            localItem.inventory += item.quantity; 
         },
     },
     actions: {
         //TIP: EL PRIMER PARAMETRO ES EL CONTEXTO, PERO LO PODEMOS DESECTRUCTURAR
         getItems({commit}){
             return new Promise((resolve) => {
-            items.getItems( items => {
-                commit("setItems", items);
-    
-                resolve();
+                serviceItems.getItems( items => {
+                    commit("setItems", items);
+        
+                    resolve();
             });
         })
       },
@@ -56,7 +55,7 @@ export default {
         //TIP: seria una propiedad computada pero del state, cuando algo cambie...se recalcula
         itemInStock(state){
             //Puede devolver una version modificada de algo de state.
-            //Ej: Ahora queremos las empanadas filtradas por si tienen stock
+            //Ej: Ahora queremos los items filtrados por si tienen stock
             return state.items.filter(item => {
               return item.inventory > 0;
             })
@@ -66,7 +65,7 @@ export default {
             return state.selectedItem;
         },
       
-        nearSoldOutEmpanada(state){
+        nearSoldOutItem(state){
             return (id) => {
               return state.items.find(item => item.id === id).inventory <= 5;
             };

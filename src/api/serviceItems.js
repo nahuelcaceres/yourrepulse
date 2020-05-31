@@ -10,13 +10,11 @@ import firebase from '../Firebase.js';
 export default {
 
   getItems(cb) {
-    //setTimeout(()=> cb(_empanadas), 100);
-
+    
     firebase.firestore().collection('empanadas').onSnapshot((querySnapshot) => {
       //this.empanadas = [];
       
       querySnapshot.forEach((doc) => {
-        
         //if (doc.data().estado == 'alta') {
           _empanadas.push({
             
@@ -30,8 +28,7 @@ export default {
             inventory: 10
 
           });
-        //}
-      });
+        });
       
       
       cb(_empanadas);
@@ -41,7 +38,7 @@ export default {
 
   },
 
-  buyEmpanadas(empanadas, cb, errorCb) {
+  buyItems(items, cb, errorCb) {
     setTimeout(() => {
 
       //TIP: simulate random checkout failure.
