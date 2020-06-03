@@ -51,12 +51,11 @@ export default {
     methods: {
         login(){
             
-            var ingresar = this.user.length > 3 && this.password.length > 3;
+            var tryLogin = this.user.length > 3 && this.password.length > 3;
             
-            if (ingresar){
+            if (tryLogin){
                 
-                firebase.auth()
-                .signInWithEmailAndPassword(this.user, this.password)
+                firebase.auth().signInWithEmailAndPassword(this.user, this.password)
                     .then(() => this.$router.replace('empanada-listado'), (error) => console.error(error));
             }
         }
