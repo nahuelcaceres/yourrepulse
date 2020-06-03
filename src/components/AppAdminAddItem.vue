@@ -2,8 +2,8 @@
     <b-row>
         <b-col cols="12">
             <h2>
-                Agregar empanadas
-                <b-link href="#/empanada-listado">(Listado de Empanadas)</b-link>
+                {{ $t('appAdminAddItem-title') }}
+                <b-link href="#/empanada-listado"> {{ $t('appAdminAddItem-link-listItems')}}</b-link>
             </h2>
             <b-jumbotron>
                 <b-form @submit="onSubmit">
@@ -11,26 +11,26 @@
                         horizontal
                         :label-cols="4"
                         breakpoint="md"
-                        label="Ingresar Codigo">
-
-                        <b-form-input id="code" v-model.trim="item.code"></b-form-input>
+                        :label= "$t('appAdminAddItem-lbl-addCode')" >
+ 
+                        <b-form-input id="code" v-model.trim="item.code" :placeholder="$t('appAdminAddItem-inp-addCode')"></b-form-input>
                     </b-form-group>
-                    
+                         
                     <b-form-group id="descriptionGroup"
                         horizontal
                         :label-cols="4"
                         breakpoint = "md"
-                        label="Ingresar Descripcion">
+                        :label= "$t('appAdminAddItem-lbl-addDescription')">
                         
                         <b-form-textarea id="description"
                             v-model="item.description"
-                            placeholder="Descripcion"
+                            :placeholder= "$t('appAdminAddItem-inp-addDescription')"
                             :rows="2"
                             :max-rows="6">{{item.description}}
                         </b-form-textarea>
                     </b-form-group>
  
-                    <b-button type="submit" variant="primary">Guardar</b-button>
+                    <b-button type="submit" variant="primary">{{ $t('appAdminAddItem-btn-save') }}</b-button>
 
                 </b-form>
             </b-jumbotron>
@@ -41,29 +41,30 @@
 <script>
 import router from '../router'
 import firebase from '../Firebase'
+
 export default {
-    name: 'AgregarEmpanada',
+    name: 'AppAdminAddItem',
     data() {
         return {
             ref: firebase.firestore().collection('items'),
             item: {
-                estado: 'alta'
             }
         }
     },
     methods: {
         onSubmit(evt){
             evt.preventDefault();
+            
             this.ref.add(this.item).then(() =>{
                 this.item.code = ''
                 this.item.description = ''
                 
                 router.push({
-                    name: 'EmpanadaListado'
+                    name: 'AppAdminItemsList'
                 })
             })
             .catch((error) => {
-                alert("Error agregando documento: ", error)
+                alert(this.$i18n.t('appAdminAddItem-error-message-adding-item'), error);
             })
         }
     }

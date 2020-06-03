@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Listado de empanadas</h2>
+    <h2>{{ $t('appItemsList-title') }}</h2>
     <hr />
     <ul>
       <li 
@@ -13,7 +13,7 @@
         {{ item.title }} | {{ item.price }} || 
         
         <i>{{ item.inventory }} </i>
-        <button @click="addToCart(item)">Add</button>
+        <button @click="addToCart(item)">{{$t('appItemsList-btn-add-to-cart')}}</button>
         
       </li>
     </ul>

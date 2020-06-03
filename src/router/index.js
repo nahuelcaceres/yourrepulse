@@ -1,42 +1,15 @@
 import VueRouter from 'vue-router';
-import BoardList from '@/components/BoardList';
-import ShowBoard from '@/components/ShowBoard';
-import AddBoard from '@/components/AddBoard';
-import EditBoard from '@/components/EditBoard';
-
 import firebase from '../Firebase'
-import Login from '@/components/Login';
-import EmpanadaListado from '@/components/EmpanadaListado';
-import AgregarEmpanada from '@/components/AgregarEmpanada';
 
 import Home from '@/views/Home';
+import AppLogin from '@/components/AppLogin';
+import AppAdminAddItem from '@/components/AppAdminAddItem';
+import AppAdminItemsList from '@/components/AppAdminItemsList';
 import AppItemsList from '@/components/AppItemsList';
 
 const router = new VueRouter({
     routes: [
-        {
-            path:'/board-list',
-            name: 'BoardList',
-            component: BoardList
-        },
-        {
-            path: '/show-board/:id',
-            name: 'ShowBoard',
-            component: ShowBoard
-        },
-        {
-            path: '/add-board',
-            name: 'AddBoard',
-            component: AddBoard
-        },
-        {
-            path: '/edit-board/:id',
-            name: 'EditBoard',
-            component: EditBoard
-        },
         
-
-
         // any url doesn't validate, send to home
         { 
             path: '*',
@@ -62,24 +35,24 @@ const router = new VueRouter({
         
         {
             path: '/login',
-            name: 'Login',
-            component: Login
+            name: 'AppLogin',
+            component: AppLogin
         },
 
 
         // routes that require authenticated user.
         {
             path: '/empanada-listado',
-            name: 'EmpanadaListado',
-            component: EmpanadaListado,
+            name: 'AppAdminItemsList',
+            component: AppAdminItemsList,
             meta:{
                 authenticated: true
             }
         },
         {
             path: '/agregar-empanada',
-            name: 'AgregarEmpanada',
-            component: AgregarEmpanada,
+            name: 'AppAdminAddItem',
+            component: AppAdminAddItem,
             meta:{
                 authenticated: true
             }
