@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    
     <transition name="slide-fade">
       <router-view></router-view>
     </transition>
+    
   </div>
 </template>
 

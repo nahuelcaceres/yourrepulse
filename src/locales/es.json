@@ -1,0 +1,42 @@
+{
+    "appAdminAddItem-title": "Agregar empanadas",
+    "appAdminAddItem-link-listItems": "[Listado de Empanadas]",
+    "appAdminAddItem-lbl-addCode": "Ingresar Codigo",
+    "appAdminAddItem-inp-addCode": "Codigo",
+    "appAdminAddItem-lbl-addDescription": "Ingresar Descripcion",
+    "appAdminAddItem-inp-addDescription": "Descripcion",
+    "appAdminAddItem-btn-save": "Guardar",
+    "appAdminAddItem-error-message-adding-item": "Error agregando item",
+
+
+    "appAdminItemsList-link-logout": "SALIR",
+    "appAdminItemsList-title": "Empanadas Listado",
+    "appAdminItemsList-link-addItem": "[Agregar Empanada]",
+    "appAdminItemsList-table-caption": "Listado de productos",
+    "appAdminItemsList-btn-edit": "Editar",
+    "appAdminItemsList-btn-toogle-inactivate": "Inactivar",
+    "appAdminItemsList-btn-toogle-activate": "Activar",
+    "appAdminItemsList-btn-delete": "Borrar",
+    "appAdminItemsList-confirm-delete-message": "Esta seguro de borrar",
+    "appAdminItemsList-error-message-deleting-item": "No se pudo borrar el item!!!",
+
+    
+    "appCart-title": "Carrito",
+    "appCart-lbl-total": "Total ",
+    "appCart-btn-buy-item": "Comprar",
+    "appCart-error-message": "Error procesando el pedido",
+    
+
+    "appItem-btn-add-to-cart": "Agregar",
+
+    "appItemsList-title": "Listado de empanadas",
+    "appItemsList-btn-add-to-cart": "Agregar",
+
+    "appLogin-title": "Loguearse",
+    "appLogin-inp-addEmail": "Email",
+    "appLogin-inp-addPassword": "Contraseña",
+    "appLogin-btn-login": "Ingresar"
+
+
+
+}

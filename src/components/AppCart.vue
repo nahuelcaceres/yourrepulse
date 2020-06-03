@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h2>Carrito</h2>
+      <h2>{{$t('appCart-title')}}</h2>
       <hr/>
       <ul>
         <li v-for="(item, $index) in itemsCart" :key="item.id">
@@ -10,14 +10,13 @@
         </li>
       </ul>
       
-      <h4>Total ${{totalCart || 0}}</h4>
+      <h4>{{$t('appCart-lbl-total')}} ${{totalCart || 0}}</h4>
 
-      <button v-if="itemsCart.length" @click="checkout">Comprar</button>
+      <button v-if="itemsCart.length" @click="checkout">{{$t('appCart-btn-buy-item')}}</button>
       <hr>
       
-      
       <div v-if="$store.state.checkoutItemError">
-          <p>Error procesando el pedido</p>
+          <p>{{ $t('appCart-error-message') }}</p>
       </div>
   </div>
 </template>

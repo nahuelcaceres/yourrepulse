@@ -1,6 +1,16 @@
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production'
-        ? '/yourrepulse/'
-        : '/'
+
+  pluginOptions: {
+    i18n: {
+      locale: 'es',
+      fallbackLocale: 'es',
+      localeDir: 'locales',
+      enableInSFC: false
+    }
+  },
+
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/yourrepulse/'
+  : '/'
 }
 
