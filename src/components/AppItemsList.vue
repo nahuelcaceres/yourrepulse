@@ -10,7 +10,7 @@
         :key="item.id"
         >
         
-        {{ item.title }} | {{ item.price }} || 
+        {{ item.title }} | ${{ formatPrice(item.price) }} || 
         
         <i>{{ item.inventory }} </i>
         <button @click="addToCart(item)">{{$t('appItemsList-btn-add-to-cart')}}</button>
@@ -23,8 +23,10 @@
 <script>
 
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import {currency} from '@/utils/currency.js';
 
 export default {
+  
     name: "AppItemsList",
     
     async created() {
@@ -44,7 +46,11 @@ export default {
         }),
         ...mapMutations({
             selectItem: 'setSelectedItem'
-        })
+        }),
+        
+        formatPrice(price){
+          return currency(price, "");
+        }
     },
     
     computed: {

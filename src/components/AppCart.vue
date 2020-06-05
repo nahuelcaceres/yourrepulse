@@ -22,8 +22,7 @@
 </template>
 
 <script>
-// TODO research why doesn't work this import.
-//import currency from '@/utils/currency.js';
+import {currency} from '@/utils/currency.js';
 
 export default {
     name: 'AppCart',
@@ -43,8 +42,7 @@ export default {
         },
 
         totalCart(){
-            //return currency(this.$store.getters.totalCart, " $");
-            return this.$store.getters.totalCart;
+            return currency(this.$store.getters.totalCart, "");
         }
     }
 }
